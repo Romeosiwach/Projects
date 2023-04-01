@@ -1,15 +1,30 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
+	"text/template"
 )
 
-func main() {
-	http.HandleFunc("/", handlerfunction)
-	http.ListenAndServe(":8080", nil)
-}
-func handlerfunction(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Romeo's first web page %s", r.URL.Path)
+var tmpl *template.Template
 
+func init() {
+	tmpl = template.Must(template.ParseGlob("templates/*html"))
+}
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "index.html", nil)
+}
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "about.html", nil)
+}
+func contactHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl.ExecuteTemplate(w, "contact.html", nil)
+}
+
+func main() {
+	fs := http.FileServer(http.Dir("assets"))
+	http.Handle("/assets/", http.StripPrefix("/assets", fs))
+	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/contact", contactHandler)
+	http.HandleFunc("/about", aboutHandler)
+	http.ListenAndServe(":8080", nil)
 }
