@@ -1,0 +1,53 @@
+body {
+    width: 90% auto;
+    margin: 30px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+header b {
+    float: left;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 500px;
+    margin-bottom: 50px;
+    background-color: aquamarine;
+}
+
+nav {
+    clear: both;
+}
+
+nav ul {
+    background-color: coral;
+    height: 80px;
+}
+
+section {
+    background-color: crimson;
+}
+
+nav ul li {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+
+
+}
+
+nav ul li a {
+
+    color: rgb(57, 7, 236);
+    font-size: 25px;
+    text-decoration: none;
+
+}
+
+nav ul li :hover {
+    background-color: aliceblue;
+    color: black;
+}
